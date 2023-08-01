@@ -18,6 +18,13 @@ def copy_files(source_folder, destination_folder):
             shutil.copy2(source_path, destination_path)
             print(f"Copying {file} to the backup folder.")
 
+            # Get the UID and GID of the current user
+            uid = os.getuid()
+            gid = os.getgid()
+
+            # Set the ownership of the copied file to the current user
+            os.chown(destination_path, uid, gid)
+
 def main():
     source_folder = "/home/jd/Pictures/GoogleEarthWallpaper"
     destination_folder = "/home/jd/Pictures/GEarthWP_Backup"
